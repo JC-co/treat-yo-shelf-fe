@@ -1,4 +1,6 @@
 import "./App.css";
+import AlertMUITemplate from "react-alert-template-mui";
+import { positions, Provider } from "react-alert";
 import React from "react";
 // import ErrorHandling from "./Components/ErrorHandling";
 import { AuthProvider } from "./Contexts/UserAuth";
@@ -18,6 +20,10 @@ import Account from "./Components/Account";
 import ButtonAppBar from "./Components/ButtonAppBar";
 import LogOutPage from "./Components/LogOutPage";
 
+const options = {
+  position: positions.MIDDLE,
+};
+
 export default function App() {
   return (
     <div className="App">
@@ -31,7 +37,10 @@ export default function App() {
             <Route path="/login" component={LogIn} />
             <Route path="/password-reset" component={PasswordReset} />
             <PrivateRoute path="/messages" component={Messages} />
-            <PrivateRoute path="/scan" component={Scanner} />
+            <Provider template={AlertMUITemplate} {...options}>
+              <PrivateRoute path="/scan" component={Scanner} />
+            </Provider>
+
             <Route path="/books/:book_id" component={BookDetails} />
             <Route path="/search" component={Search} />
             <Route path="/help" component={Help} />

@@ -6,6 +6,7 @@ import bookplaceholder from "../bookplaceholder.jpg";
 import { Button, Link } from "@material-ui/core";
 import { useAuth } from "../Contexts/UserAuth";
 import { addBookToMyBookshelf } from "../api";
+import { useAlert } from "react-alert";
 
 function Scanner() {
   const [data, setData] = useState("Not Found");
@@ -15,6 +16,7 @@ function Scanner() {
   const { currentUser } = useAuth();
 
   const handleClick = (book) => {
+    alert.show("Oh look, an alert!");
     setClick(true);
     addBookToMyBookshelf(book, currentUser.uid).then((res) => {});
   };
@@ -93,20 +95,14 @@ function Scanner() {
                   <p>Title: {book.title}</p>
                   <p>Author(s): {book.authors.map((author) => author)}</p>
                   <p>Published: {book.publishedDate}</p>
-                  {!clicked ? (
-                    <Button
-                      onClick={() => {
-                        handleClick(book);
-                      }}
-                      style={{ background: "white" }}
-                    >
-                      Add to bookshelf
-                    </Button>
-                  ) : (
-                    <Button style={{ background: "green", color: "white" }}>
-                      Added!
-                    </Button>
-                  )}
+                  <Button
+                    onClick={() => {
+                      handleClick(book);
+                    }}
+                    style={{ background: "white" }}
+                  >
+                    Add to bookshelf
+                  </Button>
                 </div>
               </div>
             );
